@@ -37,7 +37,12 @@ interface OccupiedDate {
 
 export function BookingCalendar() {
   const [ref, isInView] = useInView({ threshold: 0.2 });
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  // Adres formularza Formspree - tutaj lecą zgłoszenia rezerwacji
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeeypjjr';
+
+  const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
 
   const [selectedRoom, setSelectedRoom] = useState<'room1' | 'room2'>('room1');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -115,37 +120,71 @@ export function BookingCalendar() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
       !bookingData.checkIn || !bookingData.checkOut ||
       !bookingData.firstName || !bookingData.lastName ||
       !bookingData.email || !bookingData.phone
     ) {
-      alert('Proszę wypełnić wszystkie wymagane pola');
+      alert(
+        language === 'pl'
+          ? 'Proszę wybrać daty i wypełnić wszystkie wymagane pola'
+          : 'Please select dates and fill in all required fields'
+      );
       return;
     }
-    setOccupiedDates({
-      ...occupiedDates,
-      [selectedRoom]: [
-        ...occupiedDates[selectedRoom],
-        { start: bookingData.checkIn, end: bookingData.checkOut },
-      ],
-    });
-    console.log('Reservation sent to: jagiellonka16@op.pl');
-    setShowConfirmation(true);
-    setBookingData({
-      room: selectedRoom,
-      checkIn: null,
-      checkOut: null,
-      guests: 2,
-      firstName: '',
-      lastName: '',
-      phone: '',
-      email: '',
-      message: '',
-    });
-    setTimeout(() => setShowConfirmation(false), 5000);
+
+    setStatus('sending');
+
+    const fmt = (d: Date) => d.toLocaleDateString('pl-PL');
+    const nights = Math.round(
+      (bookingData.checkOut.getTime() - bookingData.checkIn.getTime()) / 86400000
+    );
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `Rezerwacja: ${fmt(bookingData.checkIn)} - ${fmt(bookingData.checkOut)} (${
+            selectedRoom === 'room1' ? 'Pokój 1' : 'Pokój 2'
+          })`,
+          Pokoj: selectedRoom === 'room1' ? 'Pokój 1' : 'Pokój 2',
+          Przyjazd: fmt(bookingData.checkIn),
+          Wyjazd: fmt(bookingData.checkOut),
+          Liczba_nocy: nights,
+          Liczba_osob: bookingData.guests,
+          Imie: bookingData.firstName,
+          Nazwisko: bookingData.lastName,
+          Telefon: bookingData.phone,
+          email: bookingData.email,
+          Wiadomosc: bookingData.message,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Formspree error');
+
+      setStatus('idle');
+      setShowConfirmation(true);
+      setBookingData({
+        room: selectedRoom,
+        checkIn: null,
+        checkOut: null,
+        guests: 2,
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        message: '',
+      });
+      setTimeout(() => setShowConfirmation(false), 8000);
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   const nextImage = () =>
@@ -536,12 +575,25 @@ export function BookingCalendar() {
               </div>
 
               {/* Submit */}
+              {status === 'error' && (
+                <p className="text-[#B00020]" style={{ fontSize: '14px', fontWeight: 300 }}>
+                  {language === 'pl'
+                    ? 'Nie udało się wysłać. Spróbuj ponownie lub napisz na jagiellonka16@op.pl'
+                    : 'Sending failed. Please try again or email jagiellonka16@op.pl'}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full py-4 bg-[#C9A96A] text-white hover:bg-[#1A1A1A] transition-all duration-300"
+                disabled={status === 'sending'}
+                className="w-full py-4 bg-[#C9A96A] text-white hover:bg-[#1A1A1A] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ fontSize: '16px', fontWeight: 300, letterSpacing: '0.1em' }}
               >
-                {t.booking.submit}
+                {status === 'sending'
+                  ? language === 'pl'
+                    ? 'WYSYŁANIE...'
+                    : 'SENDING...'
+                  : t.booking.submit}
               </button>
             </form>
           </motion.div>
