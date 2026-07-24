@@ -5,17 +5,17 @@ import { useInView } from './hooks/useInView';
 import { useLanguage } from '../contexts/LanguageContext';
 
 // Room 1 images - Living spaces, sitting areas, bathrooms
-import room1_img1 from '../../imports/FF84AE4F-E727-4565-95C6-0B80ABFA7EFA-2.PNG';
-import room1_img2 from '../../imports/54E0F057-DBE1-4850-B24A-F8A4806E0188.PNG';
-import room1_img3 from '../../imports/EE1A476B-D9E0-459B-855E-BE595FA17C1C-2.PNG';
-import room1_img4 from '../../imports/F26B843E-3B1A-4D69-89BD-98200F7BF7D7.PNG';
+import room1_img1 from '../../imports/FF84AE4F-E727-4565-95C6-0B80ABFA7EFA-2.jpg';
+import room1_img2 from '../../imports/54E0F057-DBE1-4850-B24A-F8A4806E0188.jpg';
+import room1_img3 from '../../imports/EE1A476B-D9E0-459B-855E-BE595FA17C1C-2.jpg';
+import room1_img4 from '../../imports/F26B843E-3B1A-4D69-89BD-98200F7BF7D7.jpg';
 import room1_img5 from '../../imports/3DAAE42E-06EE-4AB9-8A14-8B348E2E82BB-1.jpg';
 
 // Room 2 images - Bedrooms, amenities, bathrooms
-import room2_img1 from '../../imports/73F46162-FD71-46B3-AA82-CE9D138F3B8C.PNG';
-import room2_img2 from '../../imports/A40D1681-54ED-4638-9A34-9A6F944E6E95-1.PNG';
-import room2_img3 from '../../imports/7A8D08B2-AF7B-480F-8FEC-13F021F884E6-1.PNG';
-import room2_img4 from '../../imports/D912E2E5-4F81-4C03-B956-A4A822FEF80B-1.PNG';
+import room2_img1 from '../../imports/73F46162-FD71-46B3-AA82-CE9D138F3B8C.jpg';
+import room2_img2 from '../../imports/A40D1681-54ED-4638-9A34-9A6F944E6E95-1.jpg';
+import room2_img3 from '../../imports/7A8D08B2-AF7B-480F-8FEC-13F021F884E6-1.jpg';
+import room2_img4 from '../../imports/D912E2E5-4F81-4C03-B956-A4A822FEF80B-1.jpg';
 import room2_img5 from '../../imports/8FF35214-12AF-4F7B-8B24-E5C60985FC1E.jpg';
 
 interface BookingData {
@@ -299,6 +299,7 @@ export function BookingCalendar() {
           <div className="relative h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden bg-[#F5F3EF]">
             <img
               src={roomImages[selectedRoom][currentImageIndex]}
+              loading="lazy"
               alt={`${selectedRoom === 'room1' ? t.booking.room1 : t.booking.room2} - photo ${currentImageIndex + 1}`}
               className="w-full h-full object-cover"
             />
@@ -359,6 +360,7 @@ export function BookingCalendar() {
               >
                 <img
                   src={img}
+                  loading="lazy"
                   alt={`Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover"
                 />

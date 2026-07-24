@@ -2,8 +2,8 @@ import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
 import { useLanguage } from '../contexts/LanguageContext';
 import { MapPin } from 'lucide-react';
-import villaWinterImage from '../../imports/Dom_przerobione.PNG';
-import villaWinterMapBg from '../../imports/6139ECDD-7C44-4A3E-8EA5-076EECFFEF3B.PNG';
+import villaWinterImage from '../../imports/Dom_przerobione.jpg';
+import villaWinterMapBg from '../../imports/6139ECDD-7C44-4A3E-8EA5-076EECFFEF3B.jpg';
 
 interface LocationSectionProps {
   imageUrl: string;
@@ -90,6 +90,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
             <img
               src={villaWinterImage}
               alt="Willa Jagiellonka - Winter"
+              loading="lazy"
               className="w-full h-full object-cover object-bottom md:object-center"
             />
           </motion.div>
@@ -107,6 +108,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
             <img
               src={villaWinterMapBg}
               alt="Willa Jagiellonka"
+              loading="lazy"
               className="w-full h-full object-cover opacity-20"
             />
             <div className="absolute inset-0 bg-white/85" />

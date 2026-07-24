@@ -204,7 +204,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex items-center justify-between">
+        <div className="border-t border-white/10 pt-8 flex flex-col gap-2 items-start md:flex-row md:items-center md:justify-between">
           <p
             className="text-white/50"
             style={{

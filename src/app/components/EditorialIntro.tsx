@@ -53,6 +53,7 @@ export function EditorialIntro({ imageUrl }: EditorialIntroProps) {
             <img
               src={imageUrl}
               alt="Mountain view"
+              loading="lazy"
               className="w-full h-full object-cover object-bottom md:object-center opacity-50"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/30" />
