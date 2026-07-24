@@ -1,0 +1,29 @@
+name: Sync Booking calendar
+
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pobierz kalendarze z Booking.com
+        run: node scripts/sync-booking.mjs
+        env:
+          ROOM1_ICAL: ${{ secrets.ROOM1_ICAL }}
+          ROOM2_ICAL: ${{ secrets.ROOM2_ICAL }}
+      - name: Zapisz zmiany
+        run: |
+          git config user.name "booking-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/occupied.json
+          git diff --cached --quiet || (git commit -m "Aktualizacja zajetych terminow z Booking.com" && git push)
