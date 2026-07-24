@@ -85,7 +85,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-[660px] overflow-hidden shadow-lg"
+            className="relative h-[320px] sm:h-[460px] md:h-[660px] overflow-hidden shadow-lg"
           >
             <img
               src={villaWinterImage}
@@ -100,8 +100,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative overflow-hidden shadow-xl"
-          style={{ height: '500px' }}
+          className="relative overflow-hidden shadow-xl md:h-[500px]"
         >
           {/* Background Image */}
           <div className="absolute inset-0">
@@ -114,9 +113,9 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
           </div>
 
           {/* Content Layer */}
-          <div className="relative z-10 h-full grid grid-cols-3 gap-0">
+          <div className="relative z-10 h-full grid grid-cols-1 md:grid-cols-3 gap-0">
             {/* Left - Address Info */}
-            <div className="bg-white/90 p-10 flex flex-col justify-center border-r border-[#E5E5E5]">
+            <div className="bg-white/90 p-6 md:p-10 flex flex-col justify-center border-b md:border-b-0 md:border-r border-[#E5E5E5]">
               <div className="flex items-start gap-4 mb-6">
                 <MapPin size={32} className="text-[#C9A96A] flex-shrink-0 mt-1" strokeWidth={1.5} />
                 <div>
@@ -162,7 +161,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
             </div>
 
             {/* Right - Full Map Embed (2 columns) */}
-            <div className="col-span-2 h-full">
+            <div className="md:col-span-2 h-[340px] md:h-full">
               <iframe
                 title="Willa Jagiellonka location map"
                 src="https://maps.google.com/maps?q=Jagiello%C5%84ska+16,+34-500+Zakopane,+Poland&output=embed&z=16"
