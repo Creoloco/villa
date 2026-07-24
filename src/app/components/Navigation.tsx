@@ -26,10 +26,14 @@ export function Navigation() {
 
   const scrollToSection = (id: string) => {
     setIsMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.body.style.overflow = ''; // zdejmij blokade przewijania od razu
+    // odczekaj, az menu sie zwinie, zeby cel przewijania nie uciekal
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300);
   };
 
   const navItems = [
