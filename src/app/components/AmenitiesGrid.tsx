@@ -10,8 +10,8 @@ export function AmenitiesGrid() {
   const amenityIcons = [Wifi, Tv, Bath, Coffee, Car, Map];
 
   return (
-    <section ref={ref} className="bg-[#F5F3EF] py-40">
-      <div className="max-w-[1180px] mx-auto px-8">
+    <section ref={ref} className="bg-[#F5F3EF] py-20 md:py-40">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -19,7 +19,7 @@ export function AmenitiesGrid() {
           className="text-[#1A1A1A] text-center mb-20"
           style={{
             fontFamily: 'Playfair Display, serif',
-            fontSize: '56px',
+            fontSize: 'clamp(30px, 8vw, 56px)',
             fontWeight: 400,
             letterSpacing: '0.02em',
             lineHeight: 1.2,
@@ -28,7 +28,7 @@ export function AmenitiesGrid() {
           {t.amenities.heading}
         </motion.h2>
 
-        <div className="grid grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-12 mb-12">
           {t.amenities.items.map((label, index) => {
             const Icon = amenityIcons[index];
             return (
@@ -68,7 +68,7 @@ export function AmenitiesGrid() {
             className="text-[#1A1A1A] mb-3"
             style={{
               fontFamily: 'Playfair Display, serif',
-              fontSize: '24px',
+              fontSize: 'clamp(19px, 4.5vw, 24px)',
               fontWeight: 400,
               letterSpacing: '0.02em',
             }}

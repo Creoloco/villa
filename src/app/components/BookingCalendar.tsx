@@ -223,8 +223,8 @@ export function BookingCalendar() {
     );
 
   return (
-    <section ref={ref} id="rezerwacja" className="bg-white py-40">
-      <div className="max-w-[1180px] mx-auto px-8">
+    <section ref={ref} id="rezerwacja" className="bg-white py-20 md:py-40">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -232,7 +232,7 @@ export function BookingCalendar() {
           className="text-[#1A1A1A] text-center mb-6"
           style={{
             fontFamily: 'Playfair Display, serif',
-            fontSize: '56px',
+            fontSize: 'clamp(30px, 8vw, 56px)',
             fontWeight: 400,
             letterSpacing: '0.02em',
             lineHeight: 1.2,
@@ -255,7 +255,7 @@ export function BookingCalendar() {
                 className="text-[#1A1A1A] mb-3"
                 style={{
                   fontFamily: 'Playfair Display, serif',
-                  fontSize: '20px',
+                  fontSize: 'clamp(16px, 3.8vw, 20px)',
                   fontWeight: 400,
                   letterSpacing: '0.02em',
                 }}
@@ -296,7 +296,7 @@ export function BookingCalendar() {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <div className="relative h-[500px] overflow-hidden bg-[#F5F3EF]">
+          <div className="relative h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden bg-[#F5F3EF]">
             <img
               src={roomImages[selectedRoom][currentImageIndex]}
               alt={`${selectedRoom === 'room1' ? t.booking.room1 : t.booking.room2} - photo ${currentImageIndex + 1}`}
@@ -308,7 +308,7 @@ export function BookingCalendar() {
                 className="text-[#1A1A1A]"
                 style={{
                   fontFamily: 'Playfair Display, serif',
-                  fontSize: '24px',
+                  fontSize: 'clamp(19px, 4.5vw, 24px)',
                   fontWeight: 400,
                   letterSpacing: '0.02em',
                 }}
@@ -367,7 +367,7 @@ export function BookingCalendar() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left - Calendar */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -408,7 +408,7 @@ export function BookingCalendar() {
                 className="text-[#1A1A1A]"
                 style={{
                   fontFamily: 'Playfair Display, serif',
-                  fontSize: '24px',
+                  fontSize: 'clamp(19px, 4.5vw, 24px)',
                   fontWeight: 400,
                   letterSpacing: '0.02em',
                 }}

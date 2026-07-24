@@ -14,10 +14,10 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
   const { t } = useLanguage();
 
   return (
-    <section ref={ref} id="location" className="bg-[#F5F3EF] py-40">
-      <div className="max-w-[1180px] mx-auto px-8">
+    <section ref={ref} id="location" className="bg-[#F5F3EF] py-20 md:py-40">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8">
         {/* Main Content Grid */}
-        <div className="grid grid-cols-2 gap-20 items-start mb-20">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-20 items-start mb-20">
           {/* Left Column - Text (Enhanced Visibility) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -28,7 +28,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
               className="text-[#1A1A1A] mb-10"
               style={{
                 fontFamily: 'Playfair Display, serif',
-                fontSize: '56px',
+                fontSize: 'clamp(30px, 8vw, 56px)',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
                 lineHeight: 1.2,
@@ -40,7 +40,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
             <p
               className="text-[#1A1A1A] mb-10"
               style={{
-                fontSize: '20px',
+                fontSize: 'clamp(16px, 3.8vw, 20px)',
                 fontWeight: 500,
                 letterSpacing: '0.01em',
                 lineHeight: 1.7,
@@ -60,7 +60,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
                 >
                   <span
                     className="text-[#C9A96A] mr-4 mt-1 flex-shrink-0"
-                    style={{ fontSize: '24px', fontWeight: 700 }}
+                    style={{ fontSize: 'clamp(19px, 4.5vw, 24px)', fontWeight: 700 }}
                   >
                     •
                   </span>
@@ -124,7 +124,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
                     className="text-[#1A1A1A] mb-4"
                     style={{
                       fontFamily: 'Playfair Display, serif',
-                      fontSize: '28px',
+                      fontSize: 'clamp(20px, 4.5vw, 28px)',
                       fontWeight: 400,
                       letterSpacing: '0.05em',
                     }}
@@ -135,7 +135,7 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
                     className="text-[#1A1A1A] mb-2"
                     style={{
                       fontFamily: 'Playfair Display, serif',
-                      fontSize: '22px',
+                      fontSize: 'clamp(17px, 4vw, 22px)',
                       fontWeight: 400,
                       letterSpacing: '0.02em',
                     }}

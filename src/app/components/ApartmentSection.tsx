@@ -12,8 +12,8 @@ export function ApartmentSection({ imageUrl }: ApartmentSectionProps) {
   const { t } = useLanguage();
 
   return (
-    <section ref={ref} id="apartment" className="bg-white py-40">
-      <div className="max-w-[1180px] mx-auto px-8">
+    <section ref={ref} id="apartment" className="bg-white py-20 md:py-40">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -21,7 +21,7 @@ export function ApartmentSection({ imageUrl }: ApartmentSectionProps) {
           className="text-[#1A1A1A] text-center mb-20"
           style={{
             fontFamily: 'Playfair Display, serif',
-            fontSize: '56px',
+            fontSize: 'clamp(30px, 8vw, 56px)',
             fontWeight: 400,
             letterSpacing: '0.02em',
             lineHeight: 1.2,
@@ -54,7 +54,7 @@ export function ApartmentSection({ imageUrl }: ApartmentSectionProps) {
                 className="text-[#1A1A1A]"
                 style={{
                   fontFamily: 'Playfair Display, serif',
-                  fontSize: '24px',
+                  fontSize: 'clamp(19px, 4.5vw, 24px)',
                   fontWeight: 400,
                   letterSpacing: '0.01em',
                 }}
@@ -80,7 +80,7 @@ export function ApartmentSection({ imageUrl }: ApartmentSectionProps) {
                 className="text-[#1A1A1A]"
                 style={{
                   fontFamily: 'Playfair Display, serif',
-                  fontSize: '24px',
+                  fontSize: 'clamp(19px, 4.5vw, 24px)',
                   fontWeight: 400,
                   letterSpacing: '0.01em',
                 }}
@@ -155,7 +155,7 @@ export function ApartmentSection({ imageUrl }: ApartmentSectionProps) {
                   className="text-[#1A1A1A]"
                   style={{
                     fontFamily: 'Playfair Display, serif',
-                    fontSize: '22px',
+                    fontSize: 'clamp(17px, 4vw, 22px)',
                     fontWeight: 400,
                     letterSpacing: '0.02em',
                   }}

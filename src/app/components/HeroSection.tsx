@@ -38,7 +38,7 @@ export function HeroSection({ imageUrl }: HeroSectionProps) {
             className="text-white mb-4"
             style={{
               fontFamily: 'Playfair Display, serif',
-              fontSize: '90px',
+              fontSize: 'clamp(40px, 11vw, 90px)',
               fontWeight: 400,
               letterSpacing: '0.05em',
               lineHeight: 1.1,
@@ -50,7 +50,7 @@ export function HeroSection({ imageUrl }: HeroSectionProps) {
           <p
             className="text-white/90 mb-8"
             style={{
-              fontSize: '22px',
+              fontSize: 'clamp(17px, 4vw, 22px)',
               fontWeight: 300,
               letterSpacing: '0.05em',
               lineHeight: 1.6,

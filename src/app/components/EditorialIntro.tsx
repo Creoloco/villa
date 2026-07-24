@@ -11,9 +11,9 @@ export function EditorialIntro({ imageUrl }: EditorialIntroProps) {
   const { t } = useLanguage();
 
   return (
-    <section ref={ref} id="home" className="bg-white py-40">
-      <div className="max-w-[1180px] mx-auto px-8">
-        <div className="grid grid-cols-2 gap-20 items-center">
+    <section ref={ref} id="home" className="bg-white py-20 md:py-40">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -23,7 +23,7 @@ export function EditorialIntro({ imageUrl }: EditorialIntroProps) {
               className="text-[#1A1A1A] mb-8"
               style={{
                 fontFamily: 'Playfair Display, serif',
-                fontSize: '56px',
+                fontSize: 'clamp(30px, 8vw, 56px)',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
                 lineHeight: 1.2,
@@ -48,7 +48,7 @@ export function EditorialIntro({ imageUrl }: EditorialIntroProps) {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-[700px] overflow-hidden"
+            className="relative h-[320px] sm:h-[460px] md:h-[700px] overflow-hidden"
           >
             <img
               src={imageUrl}

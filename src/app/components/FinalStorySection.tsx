@@ -21,7 +21,7 @@ export function FinalStorySection({ imageUrl }: FinalStorySectionProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40" />
       </div>
 
-      <div className="relative h-full flex flex-col items-center justify-center text-center px-8">
+      <div className="relative h-full flex flex-col items-center justify-center text-center px-5 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -31,7 +31,7 @@ export function FinalStorySection({ imageUrl }: FinalStorySectionProps) {
             className="text-white mb-6 max-w-[800px] mx-auto"
             style={{
               fontFamily: 'Playfair Display, serif',
-              fontSize: '42px',
+              fontSize: 'clamp(25px, 6vw, 42px)',
               fontWeight: 400,
               letterSpacing: '0.02em',
               lineHeight: 1.5,

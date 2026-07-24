@@ -10,8 +10,8 @@ export function GuestTypeSection() {
   const { t } = useLanguage();
 
   return (
-    <section ref={ref} className="bg-[#F5F3EF] py-40">
-      <div className="max-w-[1180px] mx-auto px-8">
+    <section ref={ref} className="bg-[#F5F3EF] py-20 md:py-40">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -19,7 +19,7 @@ export function GuestTypeSection() {
           className="text-[#1A1A1A] text-center mb-20"
           style={{
             fontFamily: 'Playfair Display, serif',
-            fontSize: '56px',
+            fontSize: 'clamp(30px, 8vw, 56px)',
             fontWeight: 400,
             letterSpacing: '0.02em',
             lineHeight: 1.2,
@@ -28,7 +28,7 @@ export function GuestTypeSection() {
           {t.guestTypes.heading}
         </motion.h2>
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
           {t.guestTypes.items.map((label, index) => {
             const Icon = icons[index];
             return (

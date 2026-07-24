@@ -21,15 +21,15 @@ export function Footer() {
 
   return (
     <footer id="contact" className="bg-[#1A1A1A] text-white py-20">
-      <div className="max-w-[1180px] mx-auto px-8">
-        <div className="grid grid-cols-4 gap-12 mb-16">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12 mb-16">
           {/* Brand & Address */}
           <div>
             <h3
               className="mb-4"
               style={{
                 fontFamily: 'Playfair Display, serif',
-                fontSize: '24px',
+                fontSize: 'clamp(19px, 4.5vw, 24px)',
                 fontWeight: 400,
                 letterSpacing: '0.05em',
               }}

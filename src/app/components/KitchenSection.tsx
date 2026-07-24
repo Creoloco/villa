@@ -12,7 +12,7 @@ export function KitchenSection({ imageUrl }: KitchenSectionProps) {
 
   return (
     <section ref={ref} className="bg-white py-20">
-      <div className="max-w-[700px] mx-auto px-8 text-center">
+      <div className="max-w-[700px] mx-auto px-5 md:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -22,7 +22,7 @@ export function KitchenSection({ imageUrl }: KitchenSectionProps) {
             className="text-[#1A1A1A] mb-6"
             style={{
               fontFamily: 'Playfair Display, serif',
-              fontSize: '44px',
+              fontSize: 'clamp(26px, 6.5vw, 44px)',
               fontWeight: 400,
               letterSpacing: '0.02em',
               lineHeight: 1.2,
