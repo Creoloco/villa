@@ -85,12 +85,12 @@ export function LocationSection({ imageUrl }: LocationSectionProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-[320px] sm:h-[460px] md:h-[660px] overflow-hidden shadow-lg"
+            className="relative h-[380px] sm:h-[500px] md:h-[660px] overflow-hidden shadow-lg"
           >
             <img
               src={villaWinterImage}
               alt="Willa Jagiellonka - Winter"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-bottom md:object-center"
             />
           </motion.div>
         </div>

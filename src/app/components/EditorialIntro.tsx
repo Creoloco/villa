@@ -48,12 +48,12 @@ export function EditorialIntro({ imageUrl }: EditorialIntroProps) {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-[320px] sm:h-[460px] md:h-[700px] overflow-hidden"
+            className="relative h-[380px] sm:h-[500px] md:h-[700px] overflow-hidden"
           >
             <img
               src={imageUrl}
               alt="Mountain view"
-              className="w-full h-full object-cover opacity-50"
+              className="w-full h-full object-cover object-bottom md:object-center opacity-50"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/30" />
           </motion.div>
