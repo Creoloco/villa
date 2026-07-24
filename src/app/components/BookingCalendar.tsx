@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Calendar, User, Mail, Phone, MessageSquare, Users, ChevronLeft, ChevronRight, Info } from 'lucide-react';
 import { useInView } from './hooks/useInView';
@@ -70,6 +70,32 @@ export function BookingCalendar() {
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [showConfirmation, setShowConfirmation] = useState(false);
+
+  // Wczytuje zajete terminy z Booking.com (plik generowany automatem na GitHubie).
+  // Uwaga: data konca w iCal to dzien WYJAZDU, wiec blokujemy noce do dnia przed nia.
+  useEffect(() => {
+    fetch('./occupied.json')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data) return;
+        const parseRanges = (ranges: { start: string; end: string }[] = []) =>
+          ranges
+            .map(({ start, end }) => {
+              const s = new Date(start + 'T00:00:00');
+              const e = new Date(end + 'T00:00:00');
+              e.setDate(e.getDate() - 1); // dzien wyjazdu zostaje wolny na nowy przyjazd
+              return { start: s, end: e };
+            })
+            .filter((r) => !isNaN(r.start.getTime()) && !isNaN(r.end.getTime()) && r.end >= r.start);
+        setOccupiedDates({
+          room1: parseRanges(data.room1),
+          room2: parseRanges(data.room2),
+        });
+      })
+      .catch(() => {
+        // brak pliku = kalendarz po prostu niczego nie wyszarza
+      });
+  }, []);
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
