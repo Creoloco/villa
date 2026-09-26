@@ -1,11 +1,12 @@
 // Pobiera kalendarze iCal z Booking.com i zapisuje zajete terminy do public/occupied.json
 // Linki do kalendarzy podawane sa przez zmienne srodowiskowe (sekrety GitHuba):
-//   ROOM1_ICAL, ROOM2_ICAL
+//   ROOM1_ICAL, ROOM2_ICAL, ROOM3_ICAL
 import { writeFileSync, mkdirSync } from 'node:fs';
 
 const sources = {
   room1: process.env.ROOM1_ICAL,
   room2: process.env.ROOM2_ICAL,
+  room3: process.env.ROOM3_ICAL,
 };
 
 // "20260812" albo "20260812T140000Z" -> "2026-08-12"
@@ -34,7 +35,7 @@ function parseIcs(text) {
   return events;
 }
 
-const result = { room1: [], room2: [] };
+const result = { room1: [], room2: [], room3: [] };
 let hadError = false;
 
 for (const [room, url] of Object.entries(sources)) {

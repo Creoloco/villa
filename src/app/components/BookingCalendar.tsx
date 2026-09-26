@@ -18,8 +18,18 @@ import room2_img3 from '../../imports/7A8D08B2-AF7B-480F-8FEC-13F021F884E6-1.jpg
 import room2_img4 from '../../imports/D912E2E5-4F81-4C03-B956-A4A822FEF80B-1.jpg';
 import room2_img5 from '../../imports/8FF35214-12AF-4F7B-8B24-E5C60985FC1E.jpg';
 
+// Room 3 images
+import room3_img1 from '../../imports/pokoj3-salon.jpg';
+import room3_img2 from '../../imports/pokoj3-sypialnia.jpg';
+import room3_img3 from '../../imports/pokoj3-lozko-szafa.jpg';
+import room3_img4 from '../../imports/pokoj3-aneks.jpg';
+import room3_img5 from '../../imports/pokoj3-lazienka.jpg';
+
+type RoomId = 'room1' | 'room2' | 'room3';
+const ROOMS: RoomId[] = ['room1', 'room2', 'room3'];
+
 interface BookingData {
-  room: 'room1' | 'room2';
+  room: RoomId;
   checkIn: Date | null;
   checkOut: Date | null;
   guests: number;
@@ -44,7 +54,7 @@ export function BookingCalendar() {
 
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
 
-  const [selectedRoom, setSelectedRoom] = useState<'room1' | 'room2'>('room1');
+  const [selectedRoom, setSelectedRoom] = useState<RoomId>('room1');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [bookingData, setBookingData] = useState<BookingData>({
     room: 'room1',
@@ -61,12 +71,19 @@ export function BookingCalendar() {
   const roomImages = {
     room1: [room1_img1, room1_img5, room1_img3, room1_img4, room1_img2],
     room2: [room2_img1, room2_img5, room2_img3, room2_img4, room2_img2],
+    room3: [room3_img1, room3_img2, room3_img3, room3_img4, room3_img5],
   };
+
+  const roomLabel = (room: RoomId) =>
+    room === 'room1' ? t.booking.room1 : room === 'room2' ? t.booking.room2 : t.booking.room3;
+  const roomLabelPl = (room: RoomId) =>
+    room === 'room1' ? 'Pokój 1' : room === 'room2' ? 'Pokój 2' : 'Pokój 3';
 
   const [occupiedDates, setOccupiedDates] = useState<{
     room1: OccupiedDate[];
     room2: OccupiedDate[];
-  }>({ room1: [], room2: [] });
+    room3: OccupiedDate[];
+  }>({ room1: [], room2: [], room3: [] });
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -90,6 +107,7 @@ export function BookingCalendar() {
         setOccupiedDates({
           room1: parseRanges(data.room1),
           room2: parseRanges(data.room2),
+          room3: parseRanges(data.room3),
         });
       })
       .catch(() => {
@@ -111,7 +129,7 @@ export function BookingCalendar() {
     return days;
   };
 
-  const isDateOccupied = (date: Date, room: 'room1' | 'room2') =>
+  const isDateOccupied = (date: Date, room: RoomId) =>
     occupiedDates[room].some((o) => {
       const ms = date.getTime();
       return ms >= o.start.getTime() && ms <= o.end.getTime();
@@ -176,10 +194,8 @@ export function BookingCalendar() {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          _subject: `Rezerwacja: ${fmt(bookingData.checkIn)} - ${fmt(bookingData.checkOut)} (${
-            selectedRoom === 'room1' ? 'Pokój 1' : 'Pokój 2'
-          })`,
-          Pokoj: selectedRoom === 'room1' ? 'Pokój 1' : 'Pokój 2',
+          _subject: `Rezerwacja: ${fmt(bookingData.checkIn)} - ${fmt(bookingData.checkOut)} (${roomLabelPl(selectedRoom)})`,
+          Pokoj: roomLabelPl(selectedRoom),
           Przyjazd: fmt(bookingData.checkIn),
           Wyjazd: fmt(bookingData.checkOut),
           Liczba_nocy: nights,
@@ -300,7 +316,7 @@ export function BookingCalendar() {
             <img
               src={roomImages[selectedRoom][currentImageIndex]}
               loading="lazy"
-              alt={`${selectedRoom === 'room1' ? t.booking.room1 : t.booking.room2} - photo ${currentImageIndex + 1}`}
+              alt={`${roomLabel(selectedRoom)} - photo ${currentImageIndex + 1}`}
               className="w-full h-full object-cover"
             />
 
@@ -314,7 +330,7 @@ export function BookingCalendar() {
                   letterSpacing: '0.02em',
                 }}
               >
-                {selectedRoom === 'room1' ? t.booking.room1 : t.booking.room2}
+                {roomLabel(selectedRoom)}
               </p>
             </div>
 
@@ -377,8 +393,8 @@ export function BookingCalendar() {
             transition={{ duration: 0.8 }}
           >
             {/* Room Selection */}
-            <div className="mb-8 flex gap-4">
-              {(['room1', 'room2'] as const).map((room) => (
+            <div className="mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+              {ROOMS.map((room) => (
                 <button
                   key={room}
                   onClick={() => {
@@ -393,7 +409,7 @@ export function BookingCalendar() {
                   }`}
                   style={{ fontSize: '16px', fontWeight: 300, letterSpacing: '0.02em' }}
                 >
-                  {room === 'room1' ? t.booking.room1 : t.booking.room2}
+                  {roomLabel(room)}
                 </button>
               ))}
             </div>
